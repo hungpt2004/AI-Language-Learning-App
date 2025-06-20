@@ -1,0 +1,31 @@
+import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'interceptors/auth_interceptor.dart';
+
+class DioClient {
+  static Dio createPublicDio() {
+    final dio = Dio(BaseOptions(
+      baseUrl: dotenv.env['SERVER_URL'] ?? '',
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 10),
+    ));
+
+    dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+    return dio;
+  }
+
+  static Dio createPrivateDio(Future<String?> Function() getToken) {
+    final dio = Dio(BaseOptions(
+      baseUrl: dotenv.env['SERVER_URL'] ?? '',
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 10),
+    ));
+
+    dio.interceptors.addAll([
+      LogInterceptor(requestBody: true, responseBody: true),
+      AuthInterceptor(getToken), 
+    ]);
+
+    return dio;
+  }
+}

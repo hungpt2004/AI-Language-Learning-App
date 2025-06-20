@@ -1,7 +1,12 @@
 import 'package:carenet_attendance_app/features/authentication/data/datasources/authenticationRemoteDataSource.dart';
 import 'package:carenet_attendance_app/features/authentication/domain/entities/user.entity.dart';
+import 'package:dio/dio.dart';
 
 class Authenticationremotedatasourceimpl implements Authenticationremotedatasource {
+
+  final Dio dio;
+
+  Authenticationremotedatasourceimpl(this.dio);
 
   @override
   Future<List<User>> findAllUsers() async {
@@ -15,5 +20,17 @@ class Authenticationremotedatasourceimpl implements Authenticationremotedatasour
       return [];
     }
   }
+  
+  @override
+  Future<User?> signInWithEmailAndPassword(String email, String password) async {
+    try {
+      await Future.delayed(Duration(seconds: 500));
+      return User(id: '3', fullname: 'loginuser', email: 'hugn', password: '123');
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  
 
 }
