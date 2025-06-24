@@ -1,22 +1,48 @@
-// import 'package:shared_preferences/shared_preferences.dart';
-// import 'core/network/dio_client.dart';
+import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dio/dio.dart';
+import 'core/network/dio_client.dart';
 
-// void init() async {
-//   final prefs = await SharedPreferences.getInstance();
-//   sl.registerLazySingleton(() => prefs);
+final sl = GetIt.instance;
 
-//   // ✅ Public Dio (dùng ngay)
-//   sl.registerLazySingleton<Dio>(() => DioClient.createPublicDio(), instanceName: 'PublicDio');
+Future<void> init() async {
+  // External dependencies
+  final prefs = await SharedPreferences.getInstance();
+  sl.registerLazySingleton(() => prefs);
 
-//   // ✅ Private Dio (dùng với token)
-//   sl.registerLazySingleton<Dio>(() => DioClient.createPrivateDio(() async {
-//     return sl<SharedPreferences>().getString('access_token');
-//   }), instanceName: 'PrivateDio');
+  // Network - Dio clients
+  sl.registerLazySingleton<Dio>(
+    () => DioClient.createPublicDio(),
+    instanceName: 'PublicDio',
+  );
 
-//   // Inject data source với đúng Dio
-//   sl.registerLazySingleton<AuthRemoteDataSource>(
-//       () => AuthRemoteDataSourceImpl(sl<Dio>(instanceName: 'PublicDio')));
+  sl.registerLazySingleton<Dio>(
+    () => DioClient.createPrivateDio(
+      () async {
+        return sl<SharedPreferences>().getString('access_token');
+      },
+    ),
+    instanceName: 'PrivateDio',
+  );
 
-//   sl.registerLazySingleton<UserRemoteDataSource>(
-//       () => UserRemoteDataSourceImpl(sl<Dio>(instanceName: 'PrivateDio')));
-// }
+  // Data sources
+  // sl.registerLazySingleton<AuthRemoteDataSource>(
+  //   () => AuthRemoteDataSourceImpl(sl<Dio>(instanceName: 'PublicDio'))
+  // );
+
+  // sl.registerLazySingleton<UserRemoteDataSource>(
+  //   () => UserRemoteDataSourceImpl(sl<Dio>(instanceName: 'PrivateDio'))
+  // );
+
+  // Repositories
+  // sl.registerLazySingleton<AuthRepository>(
+  //   () => AuthRepositoryImpl(sl<AuthRemoteDataSource>())
+  // );
+
+  // Use cases
+  // sl.registerLazySingleton(() => LoginUseCase(sl<AuthRepository>()));
+  // sl.registerLazySingleton(() => GetUserProfileUseCase(sl<UserRepository>()));
+
+  // Blocs/Cubits
+  // sl.registerFactory(() => AuthBloc(sl<LoginUseCase>()));
+}

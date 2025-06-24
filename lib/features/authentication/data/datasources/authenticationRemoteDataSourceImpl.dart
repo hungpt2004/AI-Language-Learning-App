@@ -28,6 +28,7 @@ class Authenticationremotedatasourceimpl implements Authenticationremotedatasour
       return User(id: '3', fullname: 'loginuser', email: 'hugn', password: '123');
     } catch (error) {
       print(error.toString());
+      return null;
     }
   }
 

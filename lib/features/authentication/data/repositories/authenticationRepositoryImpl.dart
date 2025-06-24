@@ -24,7 +24,7 @@ class Authenticationrepositoryimpl implements Authenticationrepository {
   
   @override
   Future<void> signInWithEmailAndPassword(String email, String password) async {
-    var userResponse = await authenticationRemote.signInWithEmailAndPassword(email, password);
+    await authenticationRemote.signInWithEmailAndPassword(email, password);
     await authenticationLocal.saveToken('1234566');
   }
 

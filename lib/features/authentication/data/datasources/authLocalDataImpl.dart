@@ -13,13 +13,13 @@ class Authlocaldataimpl implements Authlocaldatarepository {
   }
 
   @override
-  Future<void> removeToken() {
+  Future<void> removeToken() async {
+    await prefs.remove('token');
   }
 
   @override
-  Future<void> saveToken(String token) {
-    // TODO: implement saveToken
-    throw UnimplementedError();
+  Future<void> saveToken(String token) async {
+    await prefs.setString('token', token);
   }
   
 }

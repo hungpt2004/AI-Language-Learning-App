@@ -3,6 +3,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'interceptors/auth_interceptor.dart';
 
 class DioClient {
+
+  // Tạo dio client để tương tác mà không có header token
   static Dio createPublicDio() {
     final dio = Dio(BaseOptions(
       baseUrl: dotenv.env['SERVER_URL'] ?? '',
@@ -10,10 +12,14 @@ class DioClient {
       receiveTimeout: const Duration(seconds: 10),
     ));
 
-    dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+    dio.interceptors.add(
+      LogInterceptor(requestBody: true, responseBody: true)
+    );
+    
     return dio;
   }
 
+  // Dio client có header token của user
   static Dio createPrivateDio(Future<String?> Function() getToken) {
     final dio = Dio(BaseOptions(
       baseUrl: dotenv.env['SERVER_URL'] ?? '',
