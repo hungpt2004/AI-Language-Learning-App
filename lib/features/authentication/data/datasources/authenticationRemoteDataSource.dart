@@ -1,4 +1,4 @@
-import 'package:carenet_attendance_app/features/authentication/domain/entities/user.entity.dart';
+import 'package:carenet_attendance_app/features/authentication/data/entities/user.entity.dart';
 
 
 

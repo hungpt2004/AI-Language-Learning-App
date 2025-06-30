@@ -52,6 +52,8 @@ class AppRoutes {
     SlideTransitionType transitionType,
   ) {
     switch (transitionType) {
+
+      // Hiệu ứng trượt qua bên phải
       case SlideTransitionType.slideRight:
         return SlideTransition(
           position: Tween<Offset>(
@@ -64,6 +66,7 @@ class AppRoutes {
           child: child,
         );
 
+      // Hiệu ứng trượt lên
       case SlideTransitionType.slideUp:
         return SlideTransition(
           position: Tween<Offset>(
@@ -76,6 +79,7 @@ class AppRoutes {
           child: child,
         );
 
+      // Hiệu ứng trượt xuống
       case SlideTransitionType.slideDown:
         return SlideTransition(
           position: Tween<Offset>(
@@ -88,6 +92,7 @@ class AppRoutes {
           child: child,
         );
 
+      // Hiệu ứng trượt sang trái
       case SlideTransitionType.slideLeft:
         return SlideTransition(
           position: Tween<Offset>(
@@ -100,12 +105,14 @@ class AppRoutes {
           child: child,
         );
 
+      // Hiệu ứng làm mờ
       case SlideTransitionType.fade:
         return FadeTransition(
           opacity: animation,
           child: child,
         );
 
+      // Hiệu ứng phóng to
       case SlideTransitionType.scale:
         return ScaleTransition(
           scale: Tween<double>(
@@ -118,6 +125,7 @@ class AppRoutes {
           child: child,
         );
 
+      // Hiệu ứng xoay tròn
       case SlideTransitionType.rotation:
         return RotationTransition(
           turns: Tween<double>(

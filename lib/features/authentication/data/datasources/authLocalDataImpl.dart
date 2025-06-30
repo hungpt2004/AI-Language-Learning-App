@@ -1,11 +1,11 @@
 import 'package:carenet_attendance_app/features/authentication/domain/repositories/authLocalDataRepository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Authlocaldataimpl implements Authlocaldatarepository {
+class AuthlocaldataImpl implements Authlocaldatarepository {
 
   final SharedPreferences prefs;
 
-  Authlocaldataimpl(this.prefs);
+  AuthlocaldataImpl(this.prefs);
 
   @override
   Future<String?> getToken() async {

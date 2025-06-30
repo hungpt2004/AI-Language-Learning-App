@@ -57,7 +57,7 @@ class AppNavigator {
     }
   }
 
-  // Specific navigation methods for common flows
+  // Tạo các điều hướng cụ thể ở đây
   static Future<void> toLogin() {
     return pushReplacementNamed(AppRoutes.login);
   }

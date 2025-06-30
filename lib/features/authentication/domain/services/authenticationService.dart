@@ -1,5 +1,5 @@
 import 'package:carenet_attendance_app/features/authentication/data/repositories/authenticationRepositoryImpl.dart';
-import 'package:carenet_attendance_app/features/authentication/domain/entities/user.entity.dart';
+import 'package:carenet_attendance_app/features/authentication/data/entities/user.entity.dart';
 
 class AuthenticationService {
 
@@ -9,6 +9,10 @@ class AuthenticationService {
 
   Future<List<User>> findAllUsers() async {
     return authenticationRepo.findAllUsers();
+  }
+
+  Future<void> signInWithEmailAndPassword(String email, String password) async {
+    return authenticationRepo.signInWithEmailAndPassword(email, password);
   }
 
 }

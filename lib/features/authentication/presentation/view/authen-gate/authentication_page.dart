@@ -43,7 +43,6 @@ class _AuthenticationGateState extends State<AuthenticationGate> {
   void _navigateBasedOnAuth() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_isAuthenticated) {
-        // Có token -> vào trang Home
         AppNavigator.toHome();
       } else {
         // Không có token -> vào trang Login
